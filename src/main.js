@@ -1,14 +1,41 @@
-import './assets/main.css'
+import "./assets/main.css";
 
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from "vue";
+import { createPinia } from "pinia";
+import { OhVueIcon, addIcons } from "oh-vue-icons";
+import {
+  SiVuedotjs,
+  BiKeyboard,
+  MdRestartalt,
+  BiCodeSlash,
+  BiPaletteFill,
+  RiTimerFill,
+  MdBarchart,
+  BiCheckLg,
+} from "oh-vue-icons/icons";
 
-import App from './App.vue'
-import router from './router'
+import App from "./App.vue";
+import router from "./router";
+import clickOutside from "./directives/clickOutside";
 
-const app = createApp(App)
+addIcons(
+  SiVuedotjs,
+  BiKeyboard,
+  MdRestartalt,
+  BiCodeSlash,
+  BiPaletteFill,
+  RiTimerFill,
+  MdBarchart,
+  BiCheckLg
+);
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(createPinia());
+app.use(router);
+
+app.directive("click-outside", clickOutside);
+
+app.component("VIcon", OhVueIcon);
+
+app.mount("#app");
