@@ -2,6 +2,8 @@
 import { watchEffect } from "vue";
 
 import { useThemeStore } from "./stores/theme";
+import AppHeader from "./components/AppHeader.vue";
+import AppFooter from "./components/AppFooter.vue";
 
 const theme = useThemeStore();
 
@@ -16,6 +18,8 @@ watchEffect(() => {
 
 <template>
     <main class="container">
+      <AppHeader />
       <RouterView />
+      <AppFooter />
     </main>
 </template>
