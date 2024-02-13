@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 import { useThemeStore } from "@/stores/theme";
 
-const isOpen = ref(true);
+const isOpen = ref(false);
 const theme = useThemeStore();
 
 const themeOptions = Object.keys(theme.themes);
@@ -68,10 +68,11 @@ const closeOptions = () => {
   display: inline-block;
   width: 100%;
   height: 100%;
-  color: var(--text-color);
+  color: var(--primary-color);
   cursor: pointer;
   padding-left: 1rem;
   user-select: none;
+  border-right: 1px solid var(--text-color);
 }
 
 .selected {
