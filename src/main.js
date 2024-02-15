@@ -12,6 +12,7 @@ import {
   RiTimerFill,
   MdBarchart,
   BiCheckLg,
+  FaMousePointer
 } from "oh-vue-icons/icons";
 
 import App from "./App.vue";
@@ -26,7 +27,8 @@ addIcons(
   BiPaletteFill,
   RiTimerFill,
   MdBarchart,
-  BiCheckLg
+  BiCheckLg,
+  FaMousePointer
 );
 
 const app = createApp(App);
