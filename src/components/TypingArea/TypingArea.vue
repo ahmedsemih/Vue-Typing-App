@@ -1,12 +1,21 @@
 <script setup>
-import { onBeforeMount, onMounted, ref, watch, watchEffect } from "vue";
+import {
+  onBeforeMount,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+  watchEffect,
+} from "vue";
 
 import WordBlock from "./WordBlock.vue";
 import AreaWrapper from "./AreaWrapper.vue";
 import RestartButton from "./RestartButton.vue";
 import getRandomWords from "@/utils/getRandomWords";
 import { useCountdownStore } from "@/stores/countdown";
+import { useStatisticsStore } from "@/stores/statistics";
 
+const statistics = useStatisticsStore();
 const countdown = useCountdownStore();
 const inputRef = ref(null);
 const typingAreaRef = ref(null);
@@ -88,6 +97,11 @@ const handleOtherPress = (key) => {
     userInputArray.value.push(userInput.value);
     userInput.value = "";
   } else {
+    if (key === words.value[currentWord.value][cursor.value])
+      statistics.increaseCorrectKeystrokes();
+    else 
+      statistics.increaseWrongKeystrokes();
+
     cursor.value++;
     userInput.value += key;
   }
@@ -99,6 +113,7 @@ const scrollByRow = (row) => {
 
 const restart = () => {
   countdown.reset();
+  statistics.reset();
 
   words.value = [];
   cursor.value = 0;
@@ -112,8 +127,23 @@ const restart = () => {
   setWords();
 };
 
+const setStatistics = () => {
+  if (countdown.time > 1) return;
+
+  userInputArray.value.forEach((word, index) => {
+    if (word !== userInputArray.value[index]) 
+    statistics.increaseWrongWords();
+  });
+
+  statistics.save();
+};
+
 onBeforeMount(() => setWords());
-onMounted(() => inputRef.value.focus());
+onMounted(() => {
+  inputRef.value.focus();
+  statistics.setTime(countdown.initialTime);
+});
+onUnmounted(() => setStatistics());
 
 watch(() => countdown.initialTime, () => restart());
 watchEffect(() => isWritable.value = !countdown.isPaused);
@@ -122,7 +152,7 @@ watchEffect(() => currentWord.value === words.value.length - 20 && setWords());
 
 <template>
   <AreaWrapper :isWritable="isWritable">
-     <div
+    <div
       ref="typingAreaRef"
       v-click-outside="handleClickOutside"
       @click="handleClickArea"
