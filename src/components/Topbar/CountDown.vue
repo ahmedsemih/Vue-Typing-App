@@ -14,7 +14,7 @@ const handleVisibilityChange = () => {
 watchEffect(() => {
   if (countdown.time === 0) {
     setTimeout(() => {
-      router.push("/statistics");
+      router.push("/result");
       countdown.reset();
     }, 500);
   }
