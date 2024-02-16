@@ -54,7 +54,7 @@ onUnmounted(() => {
       </button>
       <button type="button" @click="() => router.push('/statistics')">
         <v-icon scale="2" name="md-barchart" />
-        Best Statistics
+        Statistics
       </button>
     </div>
   </section>

@@ -123,7 +123,7 @@ const restart = () => {
   userInputArray.value = [];
   inputRef.value.focus();
   isWritable.value = true;
-  
+
   setWords();
   statistics.setTime(countdown.initialTime);
 };
@@ -133,15 +133,16 @@ const setStatistics = () => {
 
   userInputArray.value.forEach((word, index) => {
     if (word !== userInputArray.value[index]) 
-    statistics.increaseWrongWords();
+      statistics.increaseWrongWords();
   });
 
   statistics.save();
-  countdown.reset();
 };
 
 onBeforeMount(() => setWords());
 onMounted(() => {
+  countdown.reset();
+  statistics.reset();
   inputRef.value.focus();
   statistics.setTime(countdown.initialTime);
 });
