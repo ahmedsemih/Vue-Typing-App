@@ -123,12 +123,13 @@ const restart = () => {
   userInputArray.value = [];
   inputRef.value.focus();
   isWritable.value = true;
-
+  
   setWords();
+  statistics.setTime(countdown.initialTime);
 };
 
 const setStatistics = () => {
-  if (countdown.time > 1) return;
+  if (countdown.time > 0) return;
 
   userInputArray.value.forEach((word, index) => {
     if (word !== userInputArray.value[index]) 
@@ -136,6 +137,7 @@ const setStatistics = () => {
   });
 
   statistics.save();
+  countdown.reset();
 };
 
 onBeforeMount(() => setWords());

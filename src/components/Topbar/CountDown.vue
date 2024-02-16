@@ -12,12 +12,7 @@ const handleVisibilityChange = () => {
 };
 
 watchEffect(() => {
-  if (countdown.time === 0) {
-    setTimeout(() => {
-      router.push("/result");
-      countdown.reset();
-    }, 500);
-  }
+  if (countdown.time === 0) router.push("/result");
 });
 
 onMounted(() => {

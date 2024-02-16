@@ -49,8 +49,9 @@ export const useStatisticsStore = defineStore("statistics", {
       const sortedPerformances = bestPerformances.sort(
         (a, b) => Number(b.wpm) > Number(a.wpm)
       );
-
+      
       bestPerformances = sortedPerformances.slice(0, 5);
+      this.bestPerformances = bestPerformances;
       localStorage.setItem("bestPerformances", JSON.stringify(bestPerformances));
     },
   },
