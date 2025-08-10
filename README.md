@@ -4,8 +4,6 @@
 
 Vue Type is a typing app. Users can do typing practices and see their best performances.
 
-**Live demo: [https://vue-typing-app.vercel.app/](https://vue-typing-app.vercel.app/)**
-
 ## :bulb: Features
 
 - Minimalistic UI
